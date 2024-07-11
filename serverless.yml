@@ -1,0 +1,100 @@
+service: ${self:custom.secrets.SERVICE}
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  # - serverless-bundle # Package our functions with Webpack
+  # - serverless-offline
+  # - serverless-dotenv-plugin # Load .env as environment variables
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  # bundle:
+  #   copyFiles:
+  #     - from: "node_modules/chrome-aws-lambda/bin/*"
+  #       to: "node_modules/chrome-aws-lambda/bin/"
+  # serverless-offline:
+    # noPrependStageInUrl: true
+    # resourceRoutes: true
+  DB_NAME: ${self:custom.secrets.DB_NAME}
+  USERNAME: ${self:custom.secrets.USERNAME}
+  PASSWORD: ${self:custom.secrets.PASSWORD}
+  # EMAIL: ${self:custom.secrets.EMAIL}
+  # USER_POOL: ${self:custom.secrets.USER_POOL}
+  NODE_ENV: ${self:custom.secrets.NODE_ENV}
+  SITE_URL: ${self:custom.secrets.SITE_URL}
+  # GENERATOR_KEY: ${self:custom.secrets.GENERATOR_KEY}
+  # ENCRYPTION_KEY: ${self:custom.secrets.ENCRYPTION_KEY}
+  POSTGRESQL:
+    HOST:
+      Fn::GetAtt: [POSTGRESQL_HOST, Endpoint.Address]
+    PORT:
+      Fn::GetAtt: [POSTGRESQL_PORT, Endpoint.Port]
+    #   # Add PostgreSQL configuration
+    # IS_OFFLINE: ${self:custom.secrets.IS_OFFLINE}
+    # MOCK_HOST: ${self:custom.secrets.MOCK_HOST}
+    # MOCK_PASSWORD: ${self:custom.secrets.MOCK_PASSWORD}
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  logs:
+    restApi: true
+  runtime: nodejs16.x
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: us-east-2 # look into aws account to figure out the region
+  timeout: 600
+  vpc:
+    securityGroupIds:
+      - sg-05ed716d4f770fef5 # look into aws vpc security groups for the security group id
+    # subnetIds:
+      # - subnet-0499acfa723bef3fc #public
+      # - subnet-02003e9ffe3699133 #private
+      # - subnet-072d687b1353754ef #private
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    #postgresql
+    POSTGRESQL_HOST: ${self:custom.secrets.HOST}
+    POSTGRESQL_PORT: ${self:custom.secrets.PORT}
+    DB_NAME: ${self:custom.secrets.DB_NAME}
+    USERNAME: ${self:custom.secrets.USERNAME}
+    # EMAIL: ${self:custom.secrets.EMAIL}
+    PASSWORD: ${self:custom.secrets.PASSWORD}
+    # USER_POOL: ${self:custom.secrets.USER_POOL}
+    SITE_URL: ${self:custom.secrets.SITE_URL}
+    # IS_OFFLINE: ${self:custom.secrets.IS_OFFLINE}
+    # MOCK_HOST: ${self:custom.secrets.MOCK_HOST}
+    # MOCK_PASSWORD: ${self:custom.secrets.MOCK_PASSWORD}
+    # GENERATOR_KEY: ${self:custom.secrets.GENERATOR_KEY}
+    # ENCRYPTION_KEY: ${self:custom.secrets.ENCRYPTION_KEY}
+  # iamRoleStatements:
+    # - Effect: "Allow"
+    #   Action:
+    #     - "kms:GenerateDataKey"
+    #     - "kms:GenerateDataKeyWithoutPlaintext"
+    #     - "kms:CreateAlias"
+    #     - "kms:CreateKey"
+    #     - "kms:Decrypt"
+    #     - "kms:Encrypt"
+    #     - "kms:EnableKey"
+    #     - "kms:UpdateAlias"
+    #   Resource: "*"
+
+functions:
+  # ADMIN
+  addMessage:
+    handler: api/addMessage.handler
+    events:
+      - http:
+          path: /addMessage
+          method: post
+          cors: true
+          response:
+            headers:
+              Content-Security-Policy: "'Include frame-ancestors 'self''"
+              Strict-Transport-Security: "'max-age=31536000; includeSubDomains; preload'"

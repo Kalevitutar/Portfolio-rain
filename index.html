@@ -76,7 +76,13 @@
 
   <!-- ======= End Google Tag Manager (noscript) ======= -->
 
+  <!-- Adding JQuery tags -->
 
+  <!-- <script src="jquery-3.7.1.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+
+  <!-- Ending JQuery tags -->
 
   <!--
   <img class="background-image" src="assets/img/background/tunnel_slowmo.gif" />
@@ -85,6 +91,8 @@
 
 
   <!-- ======= Start Header ======= -->
+
+  <!-- purple color: #7D0DC3 -->
 
   <header id="header" class="header-tops">
     <div class="container">
@@ -1004,7 +1012,8 @@
           <div class="error-message"></div>
           <div class="sent-message">Your message has been sent. Thank you!</div>
         </div>
-        <div class="text-center"><button type="submit">Send Message</button></div>
+        <div class="text-center"><button id="btnSubmit" type="submit">Send Message</button>
+        </div>
       </form>
     </div>
   </section>
@@ -1025,6 +1034,8 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="api/addMessage.js"></script>
+  <script src="api/addFormData.js"></script>
 
   <script type="text/javascript">
     var typed = new Typed('.typing', {
