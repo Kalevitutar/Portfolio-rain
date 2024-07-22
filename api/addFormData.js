@@ -1,3 +1,6 @@
+// import { API } from "aws-amplify";
+
+
 jQuery( document ).ready(function($) {
  $("#btnSubmit").on("click", function(e){
     e.preventDefault();
@@ -12,8 +15,6 @@ if (key.length > 0) {
 });
 console.log(formData)
     }); 
-
- 
 });
 
 
