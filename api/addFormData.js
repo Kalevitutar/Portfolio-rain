@@ -28,7 +28,7 @@ const handleSubmit = (event) => {
  let value = $(this)[0].value;
 console.log(key, value)
 if (key.length > 0) {
-    formData[key] = value;
+    formDataj[key] = value;
 }
 });
 console.log(formDataj)
