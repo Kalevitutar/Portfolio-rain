@@ -22,7 +22,16 @@ const handleSubmit = (event) => {
     console.log("Does even this run? If not...");
     console.log("this is the event ", event);
   event.preventDefault();
-
+    let formDataj = {};
+        $("form :input").each(function(){
+ let key = $(this)[0].name; // This is the jquery object of the input, do what you will
+ let value = $(this)[0].value;
+console.log(key, value)
+if (key.length > 0) {
+    formData[key] = value;
+}
+});
+console.log(formDataj)
 
   const myForm = event.target;
   console.log("this is myForm ", myForm);
