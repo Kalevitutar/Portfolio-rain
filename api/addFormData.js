@@ -43,7 +43,9 @@ console.log(formDataj)
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams(formData).toString(),
   })
-    .then(() => navigate("/thank-you/"))
+    .then(() => 
+        // navigate("/thank-you/")
+alert("thank you"))
     .catch((error) => alert(error));
 };
 
