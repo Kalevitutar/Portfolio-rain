@@ -18,9 +18,12 @@
 // });
 
 const handleSubmit = (event) => {
+    console.log("this is the event ", event);
   event.preventDefault();
 
+
   const myForm = event.target;
+  console.log("this is myForm ", myForm);
   const formData = new FormData(myForm);
   console.log("formData: ", formData);
 
