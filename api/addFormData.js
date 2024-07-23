@@ -17,7 +17,9 @@
 //     }); 
 // });
 
+console.log("what happened before the Big Bang?");
 const handleSubmit = (event) => {
+    console.log("Does even this run? If not...");
     console.log("this is the event ", event);
   event.preventDefault();
 
