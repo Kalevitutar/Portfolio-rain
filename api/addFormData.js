@@ -33,10 +33,13 @@ if (key.length > 0) {
 });
 console.log(formDataj)
 
-  const myForm = event.target;
-  console.log("this is myForm ", myForm);
-  const formData = new FormData(myForm);
-  console.log("formData: ", formData);
+//   const myForm = event.target;
+//   console.log("this is myForm ", myForm);
+//   const formData = new FormData(myForm);
+//   console.log("formData: ", formData);
+
+delete formDataj["form-name"];
+console.log("formDataj ", formDataj);
 
   fetch("/", {
     method: "POST",
