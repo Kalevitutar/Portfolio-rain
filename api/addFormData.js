@@ -31,11 +31,11 @@ if (key.length > 0) {
     formDataj[key] = value;
 }
 });
-console.log(formDataj)
+// console.log(formDataj)
 
-//   const myForm = event.target;
+  const myForm = event.target;
 //   console.log("this is myForm ", myForm);
-//   const formData = new FormData(myForm);
+  const formData = new FormData(myForm);
 //   console.log("formData: ", formData);
 
 delete formDataj["form-name"];
