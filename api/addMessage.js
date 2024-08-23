@@ -5,6 +5,10 @@
 //     "message": "help efefhughfr9hgu9hge9"
 // }
 const AWS = require("aws-sdk");
+// import the Lambda client constructor in v2 of the SDK
+// const Lambda = require("aws-sdk/clients/lambda");
+// import the Lambda client constructor in v3 SDK
+// const { Lambda } = require("@aws-sdk/client-lambda");
 const { Client } = require("pg");
 export async function handler(event, context, callback) {
     try {
